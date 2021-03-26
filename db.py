@@ -10,7 +10,6 @@ import time
 from gridfs import GridFS
 from user import User  # importing the "User" class from the user.py file
 #print("test")
-# client = MongoClient("mongodb+srv://test:test@chatapp.yi9z3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",connect=False)
 #print("ing")
 client = MongoClient("mongodb://localhost:27017/")
 chat_db = client.get_database("ChatAppDB")
