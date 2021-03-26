@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Chat App</title>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+<script>
+function ShowCam() {
+    Webcam.set({
+        width: 320,
+        height: 240,
+        image_format: 'jpeg',
+        jpeg_quality: 100
+    });
+    Webcam.attach('#my_camera');
+}
+window.onload= ShowCam;
+
+function snap() {
+    Webcam.snap( function(data_uri) {
+        // display results in page
+        //console.log(data_uri);
+        document.getElementById('results').innerHTML = '<img id="image" src="'+data_uri+'"/>';
+        document.getElementById('data').innerHTML = '<input type="text" value="'+data_uri+'" name="imgdata">';
+      } );      
+}
+/*console.log("image_data");
+console.log(img_data);*/
+/*function upload() {
+    console.log("Uploading...")
+    var image = document.getElementById('image').src;
+    var form = document.getElementById('myForm');
+    var formData = new FormData(form);
+    formData.append("file", image);
+    //console.log(formData);
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "/signup");
+
+    // check when state changes, 
+    xmlhttp.onreadystatechange = function() {
+
+    if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        alert(xmlhttp.responseText);
+        }
+    }
+
+    xmlhttp.send(formData);
+    //console.log(formData.get('file'));
+    console.log(formData.get('username'));
+    console.log(formData.get('email'));
+    console.log(formData.get('password'));
+}*/
+</script>
+<body>
+<h1>Sign Up</h1>
+<h3>{{ message }}</h3>
+<form method="post" action="/signup" id="myForm" enctype="multipart/form-data">
+    <label>Username:</label>
+    <input type="text" name="username">
+    <br><br>
+    <label>Email:</label>
+    <input type="email" name="email">
+    <br><br>
+    <label>Password:</label>
+    <input type="password" name="password">
+    <br><br>
+    <div id="my_camera"></div>
+    <input type="button" onclick="snap()" value="Snap">
+    <div id="results"></div>
+    <br><br>
+    <div id="data"></div>
+    <br><br>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
